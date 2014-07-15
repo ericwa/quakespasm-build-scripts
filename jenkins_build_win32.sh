@@ -25,6 +25,11 @@ STRIP="$TARGET-strip"
 export PATH CC AS AR RANLIB WINDRES STRIP
 
 $MAKE_CMD SDL_CONFIG=$SDL_CONFIG CC=$CC AS=$AS RANLIB=$RANLIB AR=$AR WINDRES=$WINDRES STRIP=$STRIP -f Makefile.w32 $*
+makestatus=$?
+
+if [[ $makestatus != 0 ]]; then
+	exit $makestatus
+fi
 
 # package it:
 
