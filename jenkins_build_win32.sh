@@ -24,7 +24,7 @@ WINDRES="$TARGET-windres"
 STRIP="$TARGET-strip"
 export PATH CC AS AR RANLIB WINDRES STRIP
 
-exec $MAKE_CMD SDL_CONFIG=$SDL_CONFIG CC=$CC AS=$AS RANLIB=$RANLIB AR=$AR WINDRES=$WINDRES STRIP=$STRIP -f Makefile.w32 $*
+$MAKE_CMD SDL_CONFIG=$SDL_CONFIG CC=$CC AS=$AS RANLIB=$RANLIB AR=$AR WINDRES=$WINDRES STRIP=$STRIP -f Makefile.w32 $*
 
 # package it
 
@@ -36,9 +36,10 @@ unzip -X SDL-1.2.15-win32.zip
 
 # -j : don't store the full paths
 
-zip -9 -j $WORKSPACE/qs.zip \
-	$WORKSPACE/quakespasm/Quake/quakespasm.exe \
-	$WORKSPACE/quakespasm/README.* \
-	$WORKSPACE/quakespasm/gnu.txt \
-	$WORKSPACE/quakespasm/Windows/codecs/x86/*.dll \
+cd $WORKSPACE
+zip -9 -j qs.zip \
+	quakespasm/Quake/quakespasm.exe \
+	quakespasm/README.* \
+	quakespasm/gnu.txt \
+	quakespasm/Windows/codecs/x86/*.dll \
 	~/temp/SDL.dll
