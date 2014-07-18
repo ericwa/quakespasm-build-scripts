@@ -50,7 +50,8 @@ mv $WORKSPACE/quakespasm/Quake/quakespasm.exe \
 # -j : don't store the full paths
 
 zip -9 -j $WORKSPACE/quakespasm-r$SVN_REVISION.zip \
-	$WORKSPACE/quakespasm/Quake/*.exe \
+	$WORKSPACE/quakespasm/Quake/quakespasm-r$SVN_REVISION.exe \
+	$WORKSPACE/quakespasm/Quake/quakespasm.pak \
 	$WORKSPACE/quakespasm/README.* \
 	$WORKSPACE/quakespasm/gnu.txt \
 	$WORKSPACE/quakespasm/Windows/codecs/x86/*.dll \
