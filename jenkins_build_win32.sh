@@ -3,7 +3,7 @@
 # This script is meant to be invoked by jenkins, and assumes SDL dev lib is installed in
 # /usr/local/cross-tools/i686-w64-mingw32
 
-cd $WORKSPACE/quakespasm/Quake
+cd $WORKSPACE/Quake
 
 # build_cross_win32.sh
 
@@ -43,16 +43,16 @@ unzip -X SDL-1.2.15-win32.zip
 
 # 2. rename the exe
 
-mv $WORKSPACE/quakespasm/Quake/quakespasm.exe \
-   $WORKSPACE/quakespasm/Quake/quakespasm-r$SVN_REVISION.exe
+mv $WORKSPACE/Quake/quakespasm.exe \
+   $WORKSPACE/Quake/quakespasm-r$SVN_REVISION.exe
 
 # 3. create the archive
 # -j : don't store the full paths
 
 zip -9 -j $WORKSPACE/quakespasm-r$SVN_REVISION.zip \
-	$WORKSPACE/quakespasm/Quake/quakespasm-r$SVN_REVISION.exe \
-	$WORKSPACE/quakespasm/Quake/quakespasm.pak \
-	$WORKSPACE/quakespasm/README.* \
-	$WORKSPACE/quakespasm/gnu.txt \
-	$WORKSPACE/quakespasm/Windows/codecs/x86/*.dll \
+	$WORKSPACE/Quake/quakespasm-r$SVN_REVISION.exe \
+	$WORKSPACE/Quake/quakespasm.pak \
+	$WORKSPACE/README.* \
+	$WORKSPACE/gnu.txt \
+	$WORKSPACE/Windows/codecs/x86/*.dll \
 	~/temp/SDL.dll
