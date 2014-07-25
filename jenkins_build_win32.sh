@@ -5,6 +5,8 @@
 
 cd $WORKSPACE/Quake
 
+REVISION="r$SVN_REVISION$GIT_COMMIT"
+
 # build_cross_win32.sh
 
 TARGET=i586-mingw32msvc
@@ -44,13 +46,16 @@ unzip -X SDL-1.2.15-win32.zip
 # 2. rename the exe
 
 mv $WORKSPACE/Quake/quakespasm.exe \
-   $WORKSPACE/Quake/quakespasm-r$SVN_REVISION.exe
+   $WORKSPACE/Quake/quakespasm-$REVISION.exe
 
 # 3. create the archive
 # -j : don't store the full paths
 
-zip -9 -j $WORKSPACE/quakespasm-r$SVN_REVISION.zip \
-	$WORKSPACE/Quake/quakespasm-r$SVN_REVISION.exe \
+#delete old archives
+rm $WORKSPACE/quakespasm-*.zip
+
+zip -9 -j $WORKSPACE/quakespasm-$REVISION.zip \
+	$WORKSPACE/Quake/quakespasm-$REVISION.exe \
 	$WORKSPACE/Quake/quakespasm.pak \
 	$WORKSPACE/README.* \
 	$WORKSPACE/gnu.txt \
