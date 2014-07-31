@@ -35,20 +35,12 @@ fi
 
 # package it:
 
-# 1. Download SDL binary
-
-rm -fr ~/temp
-mkdir ~/temp
-cd ~/temp
-wget https://www.libsdl.org/release/SDL-1.2.15-win32.zip
-unzip -X SDL-1.2.15-win32.zip
-
-# 2. rename the exe
+# rename the exe
 
 mv $WORKSPACE/Quake/quakespasm.exe \
    $WORKSPACE/Quake/quakespasm-$REVISION.exe
 
-# 3. create the archive
+# create the archive
 # -j : don't store the full paths
 
 #delete old archives
@@ -60,4 +52,8 @@ zip -9 -j $WORKSPACE/quakespasm-$REVISION.zip \
 	$WORKSPACE/README.* \
 	$WORKSPACE/gnu.txt \
 	$WORKSPACE/Windows/codecs/x86/*.dll \
-	~/temp/SDL.dll
+	/usr/local/cross-tools/i686-w64-mingw32/bin/SDL.dll
+
+# SDL.dll is the one from https://www.libsdl.org/release/SDL-devel-1.2.15-mingw32.tar.gz
+# installed in the setup script. It differs from https://www.libsdl.org/release/SDL-1.2.15-win32.zip
+
