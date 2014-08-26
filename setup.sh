@@ -23,3 +23,7 @@ wget https://www.libsdl.org/release/SDL2-devel-$SDL2VER-mingw.tar.gz
 tar xvvf SDL2-devel-$SDL2VER-mingw.tar.gz
 cp -R SDL2-$SDL2VER/i686-w64-mingw32/* $DEST
 
+# bah. Hack fix for http://stackoverflow.com/questions/22446008/winapifamily-h-no-such-file-or-directory-when-compiling-sdl-in-codeblocks
+
+curl http://hg.libsdl.org/SDL/raw-file/e217ed463f25/include/SDL_platform.h > /usr/local/cross-tools/i686-w64-mingw32/include/SDL2/SDL_platform.h
+
