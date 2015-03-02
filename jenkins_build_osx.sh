@@ -8,9 +8,6 @@
 cd $WORKSPACE/Quake
 
 REVISION="r$SVN_REVISION$GIT_COMMIT"
-FRAMEWORKPATH=/usr/local/quakespasm-build-scripts/Frameworks
-
-patch -p3 < /usr/local/quakespasm-build-scripts/sdlframeworkpath.diff
 
 # build_cross_osx.sh
 
@@ -44,7 +41,7 @@ AR=i386-apple-darwin13-ar
 RANLIB=i386-apple-darwin13-ranlib
 LIPO=i386-apple-darwin13-lipo
 export CC AS AR RANLIB LIPO
-SDL_FRAMEWORK_PATH=$FRAMEWORKPATH CFLAGS=$CFLAGS SDL_FRAMEWORK_NAME=$SDL_FRAMEWORK_NAME $MAKE_CMD MACH_TYPE=x86 USE_SDL2=$SDL2 -f Makefile.darwin $* || exit 1
+CFLAGS=$CFLAGS $MAKE_CMD MACH_TYPE=x86 USE_SDL2=$SDL2 -f Makefile.darwin $* || exit 1
 i386-apple-darwin13-strip -S quakespasm || exit 1
 mv quakespasm quakespasm.x86 || exit 1
 $MAKE_CMD clean
@@ -56,7 +53,7 @@ AR=x86_64-apple-darwin13-ar
 RANLIB=x86_64-apple-darwin13-ranlib
 LIPO=x86_64-apple-darwin13-lipo
 export CC AS AR RANLIB LIPO
-SDL_FRAMEWORK_PATH=$FRAMEWORKPATH CFLAGS=$CFLAGS SDL_FRAMEWORK_NAME=$SDL_FRAMEWORK_NAME $MAKE_CMD MACH_TYPE=x86_64 USE_SDL2=$SDL2 -f Makefile.darwin $* || exit 1
+CFLAGS=$CFLAGS $MAKE_CMD MACH_TYPE=x86_64 USE_SDL2=$SDL2 -f Makefile.darwin $* || exit 1
 x86_64-apple-darwin13-strip -S quakespasm || exit 1
 mv quakespasm quakespasm.x86_64 || exit 1
 $MAKE_CMD clean
@@ -67,7 +64,7 @@ $LIPO -create -o QuakeSpasm quakespasm.x86 quakespasm.x86_64 || exit 1
 
 APPDIR=QuakeSpasm-$REVISION.app
 mkdir -p $APPDIR/Contents/Frameworks $APPDIR/Contents/MacOS $APPDIR/Contents/Resources
-cp -R $FRAMEWORKPATH/$SDL_FRAMEWORK_NAME.framework $APPDIR/Contents/Frameworks || exit 1
+cp -R ../MacOSX/$SDL_FRAMEWORK_NAME.framework $APPDIR/Contents/Frameworks || exit 1
 cp ../MacOSX/Info.plist $APPDIR/Contents || exit 1
 cp QuakeSpasm $APPDIR/Contents/MacOS || exit 1
 cp ../MacOSX/codecs/lib/*.dylib $APPDIR/Contents/MacOS || exit 1
