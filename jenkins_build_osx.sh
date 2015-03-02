@@ -2,8 +2,7 @@
 
 `/usr/local/osxcross/target/bin/osxcross-env`
 
-# This script is meant to be invoked by jenkins, and assumes SDL frameworks are installed in
-# /usr/local/quakespasm-build-scripts/Frameworks
+# This script is meant to be invoked by jenkins
 
 cd $WORKSPACE/Quake
 
@@ -31,7 +30,6 @@ CFLAGS=""
 # use SDL2 if requested
 if [[ $SDL2 != 0 ]]; then
 	SDL_FRAMEWORK_NAME=SDL2
-	CFLAGS="-DUSE_SDL2"
 fi
 
 # x86
@@ -41,7 +39,7 @@ AR=i386-apple-darwin13-ar
 RANLIB=i386-apple-darwin13-ranlib
 LIPO=i386-apple-darwin13-lipo
 export CC AS AR RANLIB LIPO
-CFLAGS=$CFLAGS $MAKE_CMD MACH_TYPE=x86 USE_SDL2=$SDL2 -f Makefile.darwin $* || exit 1
+CFLAGS=$CFLAGS $MAKE_CMD MACH_TYPE=x86 -f Makefile.darwin USE_SDL2=$SDL2 $* || exit 1
 i386-apple-darwin13-strip -S quakespasm || exit 1
 mv quakespasm quakespasm.x86 || exit 1
 $MAKE_CMD clean
@@ -53,7 +51,7 @@ AR=x86_64-apple-darwin13-ar
 RANLIB=x86_64-apple-darwin13-ranlib
 LIPO=x86_64-apple-darwin13-lipo
 export CC AS AR RANLIB LIPO
-CFLAGS=$CFLAGS $MAKE_CMD MACH_TYPE=x86_64 USE_SDL2=$SDL2 -f Makefile.darwin $* || exit 1
+CFLAGS=$CFLAGS $MAKE_CMD MACH_TYPE=x86_64 -f Makefile.darwin USE_SDL2=$SDL2 $* || exit 1
 x86_64-apple-darwin13-strip -S quakespasm || exit 1
 mv quakespasm quakespasm.x86_64 || exit 1
 $MAKE_CMD clean

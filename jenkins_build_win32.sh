@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# This script is meant to be invoked by jenkins, and assumes SDL dev lib is installed in
-# /usr/local/cross-tools/i686-w64-mingw32
+# This script is meant to be invoked by jenkins
 
 cd $WORKSPACE/Quake
 
@@ -25,16 +24,11 @@ WINDRES="$TARGET-windres"
 STRIP="$TARGET-strip"
 CFLAGS=""
 
-# use SDL2 if requested
-if [[ $SDL2 != 0 ]]; then
-	CFLAGS="-DUSE_SDL2"
-fi
-
 export PATH CC AS AR RANLIB WINDRES STRIP
 
 $MAKE_CMD -f Makefile.w32 clean
 
-CFLAGS=$CFLAGS $MAKE_CMD CC=$CC AS=$AS RANLIB=$RANLIB AR=$AR WINDRES=$WINDRES STRIP=$STRIP DEBUG=$DEBUG -f Makefile.w32 $*
+CFLAGS=$CFLAGS $MAKE_CMD CC=$CC AS=$AS RANLIB=$RANLIB AR=$AR WINDRES=$WINDRES STRIP=$STRIP DEBUG=$DEBUG -f Makefile.w32 USE_SDL2=$SDL2 $*
 makestatus=$?
 
 if [[ $makestatus != 0 ]]; then
