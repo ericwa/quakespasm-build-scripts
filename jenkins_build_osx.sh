@@ -74,4 +74,4 @@ perl -pi -e 's/\$\{EXECUTABLE_NAME\}/QuakeSpasm/g' $APPDIR/Contents/Info.plist
 
 # Zip it
 rm $WORKSPACE/quakespasm-*.zip
-zip -9 --recurse-paths $WORKSPACE/quakespasm-$REVISION-osx.zip $APPDIR
+zip -9 --recurse-paths -y $WORKSPACE/quakespasm-$REVISION-osx.zip $APPDIR
