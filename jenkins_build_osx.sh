@@ -71,7 +71,9 @@ cp ../MacOSX/QuakeSpasm.icns $APPDIR/Contents/Resources || exit 1
 
 # Fix up executable name in plist
 perl -pi -e 's/\$\{EXECUTABLE_NAME\}/QuakeSpasm/g' $APPDIR/Contents/Info.plist
+# Remove svn metadata
+find $APPDIR -name .svn|xargs rm -rf
 
 # Zip it
 rm $WORKSPACE/quakespasm-*.zip
-zip -9 --recurse-paths -y $WORKSPACE/quakespasm-$REVISION-osx.zip $APPDIR
+zip -9 -r -y $WORKSPACE/quakespasm-$REVISION-osx.zip $APPDIR
